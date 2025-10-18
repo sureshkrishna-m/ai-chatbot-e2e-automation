@@ -44,10 +44,9 @@ async function validateContextualCorrectness(question, chatbotResponse, expected
           "public_service_relevance": number, // Score for Rule 3 (0-20)
       },
       // Calculated as (Score R1 + Score R2 + Score R3) + (10 if is_hallucinated is FALSE) + (10 if is_incomplete_thought is FALSE). Max 100.
-      "overall_score_out_of_100": number 
+      "overall_score_out_of_100": number //Ensure the sum is always accurate and correct.
     }
     `;
-
 
     try {
         const response = await ai.models.generateContent({
@@ -67,19 +66,7 @@ async function validateContextualCorrectness(question, chatbotResponse, expected
 
     } catch (error) {
         console.error("LLM Validation Error:", error.message);
-        const LLMValidatorFailureResult = {
-            passed_all_rules: false,
-            reasoning: 'Call to LLM Validator got failed',
-            is_hallucinated: false,
-            is_incomplete_thought: false,
-            score_details: {
-                factual_correctness: 0,
-                completeness: 0,
-                public_service_relevance: 0
-            },
-            overall_score_out_of_100: 0
-        }
-        return LLMValidatorFailureResult;
+        throw new Error("Call to LLM failed.");
     }
 }
 

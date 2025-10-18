@@ -7,14 +7,18 @@
     "test": "npx playwright test",
     "test:headed": "npx playwright test --headed",
     "test:report": "npx playwright show-report",
-    "test:debug": "PWDEBUG=1 npx playwright test"
+    "test:debug": "PWDEBUG=1 npx playwright test",
+    "test:allure_generate": "npx allure generate allure-results -o allure-report --clean",
+    "test:allure_open": "npx allure open allure-report",
+    "test:allure_generate_and_open": "npx allure generate allure-results -o allure-report --clean && npx allure open allure-report"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.56.0",
-    "@types/node": "^24.7.2"
+    "@types/node": "^24.7.2",
+    "allure-playwright": "^3.0.0-beta.7"
   },
   "dependencies": {
     "@google/genai": "^1.24.0",

@@ -4,6 +4,8 @@ node_modules/
 archive/
 browser/
 /test-results/
+/allure-results/
+/allure-report/
 /playwright-report/
 /blob-report/
 /playwright/.cache/

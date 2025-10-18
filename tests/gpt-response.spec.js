@@ -19,6 +19,11 @@ test.describe('Test Suite - GPT-Powered Response Validation', () => {
   test('Validate AI provides clear and helpful responses and consistent between English and Arabic', async () => {
     test.setTimeout(150000)
     await chatPage.waitForChatWidget();
+    if (process.env.GEMINI_API_KEY === "") {
+      test.fail(true, 'GEMINI_API_KEY is not set')
+      return;
+    }
+    
     const englishResult = await chatPage.getAIResponseValidationResult(queries.english.publicService_QueryOne, queries.english.publicService_ExpectedResponseOne)
     console.log(JSON.stringify(englishResult, null, 1));
     await test.step(`Publish English Matching Score - ${englishResult.overall_score_out_of_100}`, async () => { })
@@ -43,6 +48,10 @@ test.describe('Test Suite - GPT-Powered Response Validation', () => {
   test('Validate whether the AI responses are not hallucinated and not incomplete thoughts', async () => {
     test.setTimeout(150000)
     await chatPage.waitForChatWidget();
+    if (process.env.GEMINI_API_KEY === "") {
+      test.fail(true, 'GEMINI_API_KEY is not set')
+      return;
+    }
 
     const result1 = await chatPage.getAIResponseValidationResult(queries.english.publicService_QueryOne, queries.english.publicService_ExpectedResponseOne)
     console.log(JSON.stringify(result1, null, 1));

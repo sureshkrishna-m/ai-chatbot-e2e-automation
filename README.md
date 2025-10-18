@@ -1,4 +1,4 @@
-# Project Title
+# AI-Chatbot-E2E-Automation
 
 ## Overview
 
@@ -13,17 +13,15 @@ This project is an automated test suite built using Playwright and JavaScript, f
 
 ## Project Structure
 
-*(Add a brief description of the project's directory structure here.  For example:)*
-
 ```
 /project-root
-├── pages/             # Page object definitions
-├── tests/             # Test files
-├── allure-results/   # Allure report data (generated after test execution)
+├── pages/               # Page object classes
+├── tests/               # Test spec files
+├── allure-results/      # Allure report data (generated after test execution)
 ├── playwright.config.js # Playwright configuration file
-├── package.json       # Project dependencies and scripts
-├── .env               # Environment variables (API keys, etc.)
-└── README.md          # This file
+├── package.json         # Project dependencies and scripts
+├── .env                 # Environment variables (API keys, etc.)
+└── README.md            # This file
 ```
 
 ## Page Object Model (POM)
@@ -51,7 +49,7 @@ Allure Reports are integrated for detailed and visually appealing test reports. 
 1.  Clone the repository:
 
     ```bash
-    git clone <your-repository-url>
+    git clone https://github.com/sureshkrishna-m/ai-chatbot-e2e-automation.git
     cd <your-project-directory>
     ```
 
@@ -66,7 +64,7 @@ Allure Reports are integrated for detailed and visually appealing test reports. 
 1.  **Gemini API Key:**
 
     *   Generate an API key from the Google AI Studio ([https://makersuite.google.com/app/apikey](https://makersuite.google.com/app/apikey)).
-    *   Create a `.env` file in the project root directory.
+    *   Update the `.env` file in the project root directory.
     *   Add your Gemini API key to the `.env` file:
 
         ```
@@ -111,20 +109,14 @@ Allure Reports are integrated for detailed and visually appealing test reports. 
 
 ### Generating Allure Reports
 
-1.  **Generate the Allure report:**
+1.  **Generate and Open the Allure report:**
 
     ```bash
-    npx allure generate allure-results -o allure-report --clean
-    ```
-
-2.  **Open the Allure report:**
-
-    ```bash
-    npx allure open allure-report
+    npm run test:allure_generate_and_open
     ```
 
     This will open the Allure report in your default web browser.
 
 ### Test Language Configuration
 
-The test language is configured within the Playwright configuration file (`playwright.config.js`). Ensure that the appropriate locale and any necessary language-specific settings are configured for your tests. *(Expand on this section if you have specific i18n or l10n configurations)*
+The test language is configured within the Playwright configuration file (`playwright.config.js`). Ensure that the appropriate locale and any necessary language-specific settings are configured for your tests.
