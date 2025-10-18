@@ -1,0 +1,18 @@
+{
+    "viewports": {
+        "desktop": {
+            "width": 1728,
+            "height": 861
+        },
+        "mobile": {
+            "width": 430,
+            "height": 932
+        }
+    },
+    "expectedEN_EnglishTextDirection": "ltr",
+    "expectedEN_ArabicTextDirection": "ltr",
+    "expectedAR_EnglishTextDirection": "rtl",
+    "expectedAR_ArabicTextDirection": "rtl",
+    "scriptTag": "<script>",
+    "sanitisedScriptTag": "&lt;script&gt;"
+}
