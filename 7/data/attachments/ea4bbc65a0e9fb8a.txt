@@ -1,0 +1,103 @@
+Required Documents for UAE Driver’s License Renewal
+
+To renew your driver’s license in the UAE, you will typically need the following documents and to complete certain steps:
+
+Valid Emirates ID
+
+You must present your original Emirates ID card.
+
+Current (Expiring/Expired) UAE Driving License
+
+Bring your existing UAE driving license for renewal.
+
+Eye Test Certificate
+
+You are required to undergo and pass an eye test at an RTA-approved eye testing center. The results will be updated directly in the RTA system by the testing center.
+
+Payment of Outstanding Fines
+
+All outstanding traffic fines must be settled before you can proceed with the renewal.
+
+Passport-sized Photograph
+
+While not always required for online renewals, some service centers may request a recent passport-sized photo. It’s advisable to have one ready, especially if renewing in person.
+
+Additional Documents (if applicable)
+
+Special categories such as diplomats, people of determination, or Emirati nationals may be asked for additional supporting documents.
+Additional Notes
+The renewal process can be completed online via the RTA website, Dubai Drive App, or at RTA service centers.
+A UAE Pass account and an RTA account are needed for online applications.
+After renewal, a temporary digital license is issued until your new physical license is ready.
+References
+: UAE Driving License Renewal Process – Required Documents & Fees
+: Renewal of the UAE Driving License – Ministry of Foreign Affairs
+: How to Renew a Dubai Driving Licence in Just a Few Minutes – Shory
+Sources
+### Required Documents for UAE Driver’s License Renewal To renew your driver’s license in the UAE, you will typically need the following documents and to complete certain steps: 1. **Valid Emirates ID** - You must present your original Emirates ID card[^1][^3]. 2. **Current (Expiring/Expired) UAE Driving License** - Bring your existing UAE driving license for renewal[^3]. 3. **Eye Test Certificate** - You are required to undergo and pass an eye test at an RTA-approved eye testing center. The results will be updated directly in the RTA system by the testing center[^1][^3]. 4. **Payment of Outstanding Fines** - All outstanding traffic fines must be settled before you can proceed with the renewal[^1]. 5. **Passport-sized Photograph** - While not always required for online renewals, some service centers may request a recent passport-sized photo. It’s advisable to have one ready, especially if renewing in person. 6. **Additional Documents (if applicable)** - Special categories such as diplomats, people of determination, or Emirati nationals may be asked for additional supporting documents[^1]. ### Additional Notes - The renewal process can be completed online via the RTA website, Dubai Drive App, or at RTA service centers[^1][^3]. - A UAE Pass account and an RTA account are needed for online applications[^3]. - After renewal, a temporary digital license is issued until your new physical license is ready[^1][^3]. --- ### References - [^1]: [UAE Driving License Renewal Process – Required Documents & Fees](https://www.binyaber.com/en/blogs-news/uae-driving-license-renewal-process-fees-fines) - [^2]: [Renewal of the UAE Driving License – Ministry of Foreign Affairs](https://www.mofa.gov.ae/en/Services/Renewal-of-the-UAE-Driving-License) - [^3]: [How to Renew a Dubai Driving Licence in Just a Few Minutes – Shory](https://www.shory.com/car-insurance/blog/how-to-renew-a-dubai-driving-licence-in-just-a-few-minutes)
+{
+ "passed_all_rules": true,
+ "reasoning": "The chatbot response is largely accurate and relevant to the question, providing key documents and steps required for driver's license renewal in the UAE. It correctly identifies the need for an Emirates ID, eye test, and payment of fines, as well as acknowledging special categories and available renewal channels. The tone is appropriate for public service. However, it fails to mention the specific renewal fees and the window for renewal (e.g., up to 6 months before expiry), which were present in the Expected Response and are crucial pieces of information for users. While it adds some relevant details not in the Expected Response (like bringing the old license and the need for a UAE Pass account), these do not fully compensate for the missing core information regarding costs and timing. No fabricated facts (hallucinations) or incomplete text were detected.",
+ "is_hallucinated": false,
+ "is_incomplete_thought": false,
+ "score_details": {
+  "factual_correctness": 20,
+  "completeness": 18,
+  "public_service_relevance": 18
+ },
+ "overall_score_out_of_100": 76
+}
+المستندات المطلوبة لتجديد رخصة القيادة في الإمارات العربية المتحدة
+
+لتجديد رخصة القيادة في دولة الإمارات، يجب تجهيز المستندات التالية:
+
+بطاقة الهوية الإماراتية الأصلية
+
+يجب تقديم بطاقة الهوية الإماراتية الأصلية سارية المفعول لإثبات الهوية.
+
+رخصة القيادة الإماراتية الحالية
+
+يجب إحضار رخصة القيادة المنتهية أو التي قاربت على الانتهاء.
+
+شهادة فحص النظر
+
+إجراء فحص نظر في أحد مراكز فحص العيون المعتمدة من هيئة الطرق والمواصلات، وتحديث النتيجة إلكترونياً في النظام.
+
+تسديد جميع المخالفات المرورية
+
+يجب دفع جميع المخالفات والغرامات المسجلة قبل إتمام عملية التجديد.
+
+صورة شخصية حديثة (في بعض الحالات)
+
+قد يُطلب منك صورة شخصية بحجم جواز السفر، خاصة إذا كنت تقدم الطلب في مركز خدمة وليس إلكترونياً.
+
+نسخة من جواز السفر والتأشيرة (للمقيمين)
+
+في بعض الحالات، خاصة للمقيمين، قد يُطلب نسخة من جواز السفر والتأشيرة السارية.
+
+شهادة عدم ممانعة من جهة العمل (NOC)
+
+قد يُطلب من بعض الوافدين شهادة عدم ممانعة من جهة العمل، حسب سياسات الشركة أو الفئة الوظيفية.
+ملاحظات إضافية
+يمكن إتمام عملية التجديد عبر الإنترنت من خلال موقع هيئة الطرق والمواصلات (RTA) أو تطبيق Dubai Drive أو أجهزة الخدمة الذاتية أو مراكز إسعاد المتعاملين.
+تصدر رخصة قيادة مؤقتة إلكترونية أثناء انتظار الرخصة الأصلية.
+يجب التأكد من دفع جميع الرسوم والغرامات قبل التقديم.
+المراجع
+: وزارة الخارجية – خدمة تجديد رخصة القيادة الإماراتية
+: شوري – خطوات تجديد رخصة القيادة في دبي
+: DXB Offplan – دليل تجديد رخصة القيادة في دبي
+: دبيزل – تسديد المخالفات شرط أساسي للتجديد
+Sources
+### المستندات المطلوبة لتجديد رخصة القيادة في الإمارات العربية المتحدة لتجديد رخصة القيادة في دولة الإمارات، يجب تجهيز المستندات التالية: 1. **بطاقة الهوية الإماراتية الأصلية** - يجب تقديم بطاقة الهوية الإماراتية الأصلية سارية المفعول لإثبات الهوية[^1][^2][^3]. 2. **رخصة القيادة الإماراتية الحالية** - يجب إحضار رخصة القيادة المنتهية أو التي قاربت على الانتهاء[^1][^2][^3]. 3. **شهادة فحص النظر** - إجراء فحص نظر في أحد مراكز فحص العيون المعتمدة من هيئة الطرق والمواصلات، وتحديث النتيجة إلكترونياً في النظام[^2][^3]. 4. **تسديد جميع المخالفات المرورية** - يجب دفع جميع المخالفات والغرامات المسجلة قبل إتمام عملية التجديد[^3][^4]. 5. **صورة شخصية حديثة (في بعض الحالات)** - قد يُطلب منك صورة شخصية بحجم جواز السفر، خاصة إذا كنت تقدم الطلب في مركز خدمة وليس إلكترونياً[^2]. 6. **نسخة من جواز السفر والتأشيرة (للمقيمين)** - في بعض الحالات، خاصة للمقيمين، قد يُطلب نسخة من جواز السفر والتأشيرة السارية[^2]. 7. **شهادة عدم ممانعة من جهة العمل (NOC)** - قد يُطلب من بعض الوافدين شهادة عدم ممانعة من جهة العمل، حسب سياسات الشركة أو الفئة الوظيفية[^2]. --- #### ملاحظات إضافية - يمكن إتمام عملية التجديد عبر الإنترنت من خلال موقع هيئة الطرق والمواصلات (RTA) أو تطبيق Dubai Drive أو أجهزة الخدمة الذاتية أو مراكز إسعاد المتعاملين[^2][^3]. - تصدر رخصة قيادة مؤقتة إلكترونية أثناء انتظار الرخصة الأصلية[^2]. - يجب التأكد من دفع جميع الرسوم والغرامات قبل التقديم[^3][^4]. --- ### المراجع - [^1]: [وزارة الخارجية – خدمة تجديد رخصة القيادة الإماراتية](https://www.mofa.gov.ae/ar-ae/services/renewal-of-the-uae-driving-license) - [^2]: [شوري – خطوات تجديد رخصة القيادة في دبي](https://www.shory.com/ar/car-insurance/blog/how-to-renew-driving-license-in-dubai) - [^3]: [DXB Offplan – دليل تجديد رخصة القيادة في دبي](https://dxboffplan.com/ar/driving-license-renewal-in-dubai/) - [^4]: [دبيزل – تسديد المخالفات شرط أساسي للتجديد](https://www.dubizzle.com/blog/cars/ar/%D8%AA%D8%AC%D8%AF%D9%8A%D8%AF-%D8%B1%D8%AE%D8%B5%D8%A9-%D8%A7%D9%84%D9%82%D9%8A%D8%A7%D8%AF%D8%A9-%D8%AF%D8%A8%D9%8A/)
+{
+ "passed_all_rules": true,
+ "reasoning": "The Chatbot Response provides a largely accurate and relevant answer to the question about renewing a driving license in the UAE. It correctly identifies the core required documents such as Emirates ID, eye test, and payment of fines. It also offers helpful additional details regarding potential requirements like personal photos, passport/visa copies for residents, and NOCs for some expats, which enhances the response's thoroughness. The tone is appropriate for a public service entity.\n\nHowever, the response lacks completeness in two key areas mentioned in the Expected Response: it completely omits the specific fee structure for renewal (AED 300/100 + 20) and the important detail that licenses can be renewed up to 6 months before their expiry. These omissions, particularly the fee information, detract from the public service relevance and completeness, as financial details are crucial for users.",
+ "is_hallucinated": false,
+ "is_incomplete_thought": false,
+ "score_details": {
+  "factual_correctness": 25,
+  "completeness": 20,
+  "public_service_relevance": 17
+ },
+ "overall_score_out_of_100": 82
+}
