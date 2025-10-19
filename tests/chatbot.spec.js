@@ -1,35 +1,26 @@
-import { test, expect } from '@playwright/test';
-import LoginPage from '../pages/LoginPage.js';
-import ChatPage from '../pages/ChatPage.js';
+import { test, expect } from '../fixtures/pages-fixture.js';
 import queries from '../testdata/queries.json' assert { type: 'json' };
 import genericData from '../testdata/genericData.json' assert {type: 'json'}
 
 test.describe('Test Suite - Chatbot UI Behavior', () => {
-    /** @type {LoginPage} */
-    let loginPage;
 
-    /** @type {ChatPage} */
-    let chatPage;
-
-    test.beforeEach(async ({ page }) => {
-        loginPage = new LoginPage(page)
-        chatPage = new ChatPage(page)
+    test.beforeEach(async ({ loginPage }) => {
         await loginPage.goto()
     })
 
-    test('Validate chat widget loads on desktop and mobile', async ({ page }) => {
+    test('Validate chat widget loads on desktop and mobile', async ({ chatPage }) => {
         // Mobile
         await chatPage.setViewport(genericData.viewports.mobile);
         await chatPage.waitForChatWidget();
-        await expect(page.locator(chatPage.chatInputContainer)).toBeVisible();
+        await expect(chatPage.page.locator(chatPage.chatInputContainer)).toBeVisible();
 
         // Desktop
         await chatPage.setViewport(genericData.viewports.desktop);
         await chatPage.waitForChatWidget();
-        await expect(page.locator(chatPage.chatInputContainer)).toBeVisible();
+        await expect(chatPage.page.locator(chatPage.chatInputContainer)).toBeVisible();
     });
 
-    test('Validate user can send messages via input box and input is cleared', async ({ page }) => {
+    test('Validate user can send messages via input box and input is cleared', async ({ chatPage }) => {
         await chatPage.waitForChatWidget();
 
         // Send the message
@@ -49,7 +40,7 @@ test.describe('Test Suite - Chatbot UI Behavior', () => {
         expect(cleared).toBeTruthy();
     });
 
-    test('Validate whether AI responses are rendered properly and no broken html displayed', async ({ page }) => {
+    test('Validate whether AI responses are rendered properly and no broken html displayed', async ({ chatPage }) => {
         await chatPage.waitForChatWidget();
 
         // Send the message
@@ -75,7 +66,7 @@ test.describe('Test Suite - Chatbot UI Behavior', () => {
         expect(openTags).toBe(closeTags);
     });
 
-    test('Validate the page scroll and accessibility', async ({ page }) => {
+    test('Validate the page scroll and accessibility', async ({ chatPage }) => {
         await chatPage.waitForChatWidget();
 
         for (let i = 0; i < 4; i++) {
@@ -91,13 +82,13 @@ test.describe('Test Suite - Chatbot UI Behavior', () => {
         await expect(lastLocator).toBeVisible({ timeout: 5000 });
 
         // Accessibility: the input should be focusable and focused after messages
-        const inputField = page.locator(chatPage.messageInput);
+        const inputField = chatPage.page.locator(chatPage.messageInput);
         await expect(inputField).toBeEditable();
         await inputField.focus();
         await expect(inputField).toBeFocused();
     });
 
-    test('Validate multilingual support LTR and RTL', async () => {
+    test('Validate multilingual support for English LTR', async ({ chatPage }) => {
         test.setTimeout(120000)
         let textDirection = ''
         await chatPage.waitForChatWidget();
@@ -106,7 +97,12 @@ test.describe('Test Suite - Chatbot UI Behavior', () => {
 
         textDirection = await chatPage.getTextDirection(queries.arabic.simpleQuery)
         expect(textDirection).toBe(genericData.expectedEN_ArabicTextDirection);
+    });
 
+    test('Validate multilingual support for Arabic RTL', async ({ chatPage }) => {
+        test.setTimeout(120000)
+        let textDirection = ''
+        await chatPage.waitForChatWidget();
         await chatPage.setAppLanguage('Arabic')
 
         textDirection = await chatPage.getTextDirection(queries.english.simpleQuery)

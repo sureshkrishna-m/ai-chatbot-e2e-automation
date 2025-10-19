@@ -1,6 +1,4 @@
-import { test as base, expect } from '@playwright/test';
-import LoginPage from '../pages/LoginPage.js';
-import ChatPage from '../pages/ChatPage.js';
+import { test as base, expect } from '../fixtures/pages-fixture.js';
 
 // Override context fixture to reset the storageState
 export const test = base.extend({
@@ -12,19 +10,12 @@ export const test = base.extend({
 });
 
 test.describe('Test Suite - Login tests', () => {
-    /** @type {LoginPage} */
-    let loginPage;
 
-    /** @type {ChatPage} */
-    let chatPage;
-
-    test.beforeEach(async ({ page }) => {
-        loginPage = new LoginPage(page);
-        chatPage = new ChatPage(page)
+    test.beforeEach(async ({ loginPage }) => {
         await loginPage.goto()
     })
 
-    test('Login with Email — Successful Login with valid credentials', async () => {
+    test('Login with Email — Successful Login with valid credentials', async ({ loginPage, chatPage }) => {
         await loginPage.clickLoginWithEmail();
         await loginPage.login(process.env.LOGIN_EMAIL, process.env.LOGIN_PASSWORD);
 
@@ -33,7 +24,7 @@ test.describe('Test Suite - Login tests', () => {
         await chatPage.verifyWelcomeUser(process.env.LOGIN_EMAIL)
     });
 
-    test('Login with Email — Error thrown for wrong password', async ({ }, testInfo) => {
+    test('Login with Email — Error thrown for wrong password', async ({ loginPage }, testInfo) => {
         await loginPage.clickLoginWithEmail();
         await loginPage.login(process.env.LOGIN_EMAIL, process.env.LOGIN_WRONG_PASSWORD);
 

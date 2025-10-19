@@ -1,23 +1,14 @@
-import { test, expect } from '@playwright/test';
-import LoginPage from '../pages/LoginPage.js'
-import ChatPage from '../pages/ChatPage.js';
+import { test, expect } from '../fixtures/pages-fixture.js';
 import queries from '../testdata/queries.json' assert { type: 'json' };
 import genericData from '../testdata/genericData.json' assert {type: 'json'}
 
 test.describe('Test Suite - Security & Injection Handling', () => {
-  /** @type {LoginPage} */
-  let loginPage;
 
-  /** @type {ChatPage} */
-  let chatPage;
-
-  test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page);
-    chatPage = new ChatPage(page)
+  test.beforeEach(async ({ loginPage }) => {
     await loginPage.goto()
   })
 
-  test('Validate chat input sanitization for script tags', async () => {
+  test('Validate chat input sanitization for script tags', async ({ chatPage }) => {
     await chatPage.waitForChatWidget();
 
     // Send the message
@@ -48,7 +39,7 @@ test.describe('Test Suite - Security & Injection Handling', () => {
     expect(containsAny).toBeTruthy()
   });
 
-  test('Validate AI does not follow malicious prompt to ignore instructions', async () => {
+  test('Validate AI does not follow malicious prompt to ignore instructions', async ({ chatPage }) => {
     await chatPage.waitForChatWidget();
 
     // Send the message

@@ -2,21 +2,25 @@
 
 ## Overview
 
-This project is an automated test suite built using Playwright and JavaScript, following the Page Object Model pattern. It leverages Allure Reports for detailed and comprehensive test reporting.
+This project is an automated test suite built using Playwright and JavaScript, following the Page Object Model pattern. The tests are ran in parallel mode using playwright's inbuild mechanism. Login state of the application is stored and used across all the tests for faster execution. It leverages Allure Reports for detailed and comprehensive test reporting.
 
 ## Tech Stack
 
 *   **Automation Tool:** Playwright
 *   **Programming Language:** JavaScript
 *   **Framework Pattern:** Page Object Model (POM)
+*   **LLM Validator:** Google Gemini CLI
+*   **Testdata Management:** JSON files
 *   **Reporting:** Allure Reports
+*   **CI/CD Integration:** Github Actions
 
 ## Project Structure
 
 ```
 /project-root
 ├── pages/               # Page object classes
-├── tests/               # Test spec files
+├── fixtures/            # Test fixtures and setup files
+├── tests/               # Test specification files
 ├── allure-results/      # Allure report data (generated after test execution)
 ├── playwright.config.js # Playwright configuration file
 ├── package.json         # Project dependencies and scripts

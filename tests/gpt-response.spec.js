@@ -1,29 +1,20 @@
-import { test, expect } from '@playwright/test';
-import LoginPage from '../pages/LoginPage.js';
-import ChatPage from '../pages/ChatPage.js';
+import { test, expect } from '../fixtures/pages-fixture.js';
 import queries from '../testdata/queries.json' assert { type: 'json' };
 
 test.describe('Test Suite - GPT-Powered Response Validation', () => {
-  /** @type {LoginPage} */
-  let loginPage;
 
-  /** @type {ChatPage} */
-  let chatPage;
-
-  test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page);
-    chatPage = new ChatPage(page)
+  test.beforeEach(async ({ loginPage }) => {
     await loginPage.goto()
   })
 
-  test('Validate AI provides clear and helpful responses and consistent between English and Arabic', async () => {
+  test('Validate AI provides clear and helpful responses and consistent between English and Arabic', async ({ chatPage }) => {
     test.setTimeout(150000)
     await chatPage.waitForChatWidget();
     if (process.env.GEMINI_API_KEY === "") {
       test.fail(true, 'GEMINI_API_KEY is not set')
       return;
     }
-    
+
     const englishResult = await chatPage.getAIResponseValidationResult(queries.english.publicService_QueryOne, queries.english.publicService_ExpectedResponseOne)
     console.log(JSON.stringify(englishResult, null, 1));
     await test.step(`Publish English Matching Score - ${englishResult.overall_score_out_of_100}`, async () => { })
@@ -45,7 +36,7 @@ test.describe('Test Suite - GPT-Powered Response Validation', () => {
     expect(arabicResult.passed_all_rules).toBeTruthy();
   });
 
-  test('Validate whether the AI responses are not hallucinated and not incomplete thoughts', async () => {
+  test('Validate whether the AI responses are not hallucinated and not incomplete thoughts', async ({ chatPage }) => {
     test.setTimeout(150000)
     await chatPage.waitForChatWidget();
     if (process.env.GEMINI_API_KEY === "") {
@@ -74,7 +65,7 @@ test.describe('Test Suite - GPT-Powered Response Validation', () => {
     expect(result2.is_incomplete_thought).toBeFalsy()
   });
 
-  test('Validate loading states and fallback messages are displayed', async () => {
+  test('Validate loading states and fallback messages are displayed', async ({ chatPage }) => {
     await chatPage.waitForChatWidget();
 
     const testMessage = queries.english.fallbackQuery;
