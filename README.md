@@ -68,7 +68,7 @@ Allure Reports are integrated for detailed and visually appealing test reports. 
     *   Add your Gemini API key to the `.env` file:
 
         ```
-        GEMINI_API_KEY=YOUR_API_KEY
+        GEMINI_API_KEY="YOUR_API_KEY"
         ```
 
 2.  **Playwright Configuration:**
