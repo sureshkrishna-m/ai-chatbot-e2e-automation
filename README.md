@@ -6,13 +6,15 @@ This project is an automated test suite built using Playwright and JavaScript, f
 
 ## Tech Stack
 
-*   **Automation Tool      :** Playwright
-*   **Programming Language :** JavaScript
-*   **Framework Pattern    :** Page Object Model (POM)
-*   **LLM Validator        :** Google Gemini CLI
-*   **Testdata Management  :** JSON files
-*   **Reporting            :** Allure Reports
-*   **CI/CD Integration    :** Github Actions
+| **Category**         | **Tool / Technology** |
+|:-------------------- |:-------------------- |
+| Automation Tool      | Playwright |
+| Programming Language | JavaScript |
+| Framework Pattern    | Page Object Model (POM) |
+| LLM Validator        | Google Gemini CLI |
+| Test Data Management | JSON Files |
+| Reporting            | Allure Reports |
+| CI/CD Integration    | GitHub Actions |
 
 ## Project Structure
 
