@@ -10,13 +10,9 @@ test.describe('Test Suite - GPT-Powered Response Validation', () => {
   test('Validate AI provides clear and helpful responses and consistent between English and Arabic', async ({ chatPage }) => {
     test.setTimeout(150000)
     await chatPage.waitForChatWidget();
-    if (process.env.GEMINI_API_KEY === "") {
-      test.fail(true, 'GEMINI_API_KEY is not set')
-      return;
-    }
+    test.skip(!process.env.GEMINI_API_KEY?.trim(), 'GEMINI_API_KEY is required for judge tests');
 
     const englishResult = await chatPage.getAIResponseValidationResult(queries.english.publicService_QueryOne, queries.english.publicService_ExpectedResponseOne)
-    console.log(JSON.stringify(englishResult, null, 1));
     await test.step(`Publish English Matching Score - ${englishResult.overall_score_out_of_100}`, async () => { })
     test.info().annotations.push({
       type: 'English Matching Score',
@@ -26,7 +22,6 @@ test.describe('Test Suite - GPT-Powered Response Validation', () => {
     expect(englishResult.passed_all_rules).toBeTruthy();
 
     const arabicResult = await chatPage.getAIResponseValidationResult(queries.arabic.publicService_QueryOne, queries.arabic.publicService_ExpectedResponseOne)
-    console.log(JSON.stringify(arabicResult, null, 1));
     await test.step(`Publish Arabic Matching Score - ${arabicResult.overall_score_out_of_100}`, async () => { })
     test.info().annotations.push({
       type: 'Arabic Matching Score',
@@ -39,13 +34,9 @@ test.describe('Test Suite - GPT-Powered Response Validation', () => {
   test('Validate whether the AI responses are not hallucinated and not incomplete thoughts', async ({ chatPage }) => {
     test.setTimeout(150000)
     await chatPage.waitForChatWidget();
-    if (process.env.GEMINI_API_KEY === "") {
-      test.fail(true, 'GEMINI_API_KEY is not set')
-      return;
-    }
+    test.skip(!process.env.GEMINI_API_KEY?.trim(), 'GEMINI_API_KEY is required for judge tests');
 
     const result1 = await chatPage.getAIResponseValidationResult(queries.english.publicService_QueryOne, queries.english.publicService_ExpectedResponseOne)
-    console.log(JSON.stringify(result1, null, 1));
     await test.step(`Publish English Matching Score - ${result1.overall_score_out_of_100}`, async () => { })
     test.info().annotations.push({
       type: 'English Matching Score',
@@ -55,7 +46,6 @@ test.describe('Test Suite - GPT-Powered Response Validation', () => {
     expect(result1.is_incomplete_thought).toBeFalsy()
 
     const result2 = await chatPage.getAIResponseValidationResult(queries.english.publicService_QueryTwo, queries.english.publicService_ExpectedResponseTwo)
-    console.log(JSON.stringify(result2, null, 1));
     await test.step(`Publish English Matching Score - ${result2.overall_score_out_of_100}`, async () => { })
     test.info().annotations.push({
       type: 'English Matching Score',

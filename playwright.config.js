@@ -2,7 +2,7 @@
 import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
 import path from 'path';
-dotenv.config({ path: path.resolve(__dirname, '.env'), quiet: true });
+dotenv.config({ path: [path.resolve(__dirname, '.env.local'), path.resolve(__dirname, '.env')], quiet: true });
 
 /**
  * @see https://playwright.dev/docs/test-configuration
@@ -46,7 +46,7 @@ export default defineConfig({
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: 1728, height: 861 },
-        storageState: process.env.STORAGE_STATE_PATH
+        storageState: process.env.STORAGE_STATE_PATH || 'playwright/.auth/state.json'
       }
     }
     // {

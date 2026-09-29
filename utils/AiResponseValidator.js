@@ -1,7 +1,24 @@
 import { GoogleGenAI } from '@google/genai';
 
-// Initialize the Gemini API client - process.env.GEMINI_API_KEY should be set
-const ai = new GoogleGenAI({});
+export function validateEvaluationResult(result) {
+    const scores = result?.score_details;
+    const limits = { factual_correctness: 30, completeness: 30, public_service_relevance: 20 };
+    const validScores = scores && Object.entries(limits).every(([key, max]) =>
+        Number.isInteger(scores[key]) && scores[key] >= 0 && scores[key] <= max);
+
+    if (!validScores || typeof result.reasoning !== 'string' || !result.reasoning.trim() ||
+        typeof result.is_hallucinated !== 'boolean' || typeof result.is_incomplete_thought !== 'boolean' ||
+        typeof result.passed_all_rules !== 'boolean' || !Number.isInteger(result.overall_score_out_of_100)) {
+        throw new Error('LLM judge returned an invalid evaluation.');
+    }
+
+    const total = scores.factual_correctness + scores.completeness + scores.public_service_relevance +
+        (result.is_hallucinated ? 0 : 10) + (result.is_incomplete_thought ? 0 : 10);
+    if (result.overall_score_out_of_100 !== total || result.passed_all_rules !== (total >= 60)) {
+        throw new Error('LLM judge returned an inconsistent evaluation.');
+    }
+    return result;
+}
 
 async function validateContextualCorrectness(question, chatbotResponse, expectedResponse) {
 
@@ -48,7 +65,12 @@ async function validateContextualCorrectness(question, chatbotResponse, expected
     }
     `;
 
+    if (!process.env.GEMINI_API_KEY?.trim()) {
+        throw new Error('GEMINI_API_KEY is required for LLM evaluation.');
+    }
+
     try {
+        const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
         const response = await ai.models.generateContent({
             model: 'gemini-2.5-flash',
             contents: evaluationPrompt,
@@ -62,11 +84,10 @@ async function validateContextualCorrectness(question, chatbotResponse, expected
         //console.log(`\nLLM Validator Reasoning: ${evaluationResult.reasoning}`);
         //console.log(`LLM Validator Response Quality score: ${evaluationResult.score_out_of_100}/100`);
 
-        return evaluationResult;
+        return validateEvaluationResult(evaluationResult);
 
     } catch (error) {
-        console.error("LLM Validation Error:", error.message);
-        throw new Error("Call to LLM failed.");
+        throw new Error('LLM evaluation failed.', { cause: error });
     }
 }
 

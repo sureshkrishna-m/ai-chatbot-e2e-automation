@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is an automated test suite built using Playwright and JavaScript, following the Page Object Model pattern. The tests are ran in parallel mode using playwright's inbuild mechanism. Login state of the application is stored and used across all the tests for faster execution. It leverages Allure Reports for detailed and comprehensive test reporting.
+Playwright end-to-end tests for an authenticated public-service chatbot. Browser checks cover login, rendering, multilingual behavior, injection handling, and response quality. Gemini evaluates answers against reference responses; its structured verdict is checked locally for valid scores and consistent arithmetic before assertions use it. LLM judgments are probabilistic and should supplement, not replace, deterministic assertions.
 
 ## Tech Stack
 
@@ -11,10 +11,10 @@ This project is an automated test suite built using Playwright and JavaScript, f
 | Automation Tool      | Playwright |
 | Programming Language | JavaScript |
 | Framework Pattern    | Page Object Model (POM) |
-| LLM Validator        | Google Gemini CLI |
+| LLM Validator        | Google Gen AI SDK |
 | Test Data Management | JSON Files |
 | Reporting            | Allure Reports |
-| CI/CD Integration    | GitHub Actions |
+| CI/CD Integration    | GitHub Actions (private, short-lived test artifacts) |
 
 ## Project Structure
 
@@ -62,20 +62,15 @@ Allure Reports are integrated for detailed and visually appealing test reports. 
 2.  Install dependencies:
 
     ```bash
-    npm install
+    npm ci
+    npx playwright install chromium
     ```
 
 ### Configuration
 
-1.  **Gemini API Key:**
+1.  The repository includes `.env` for shared, non-sensitive defaults. Keep tracked values free of real credentials and API keys; set `CHATBOT_URL`, `LOGIN_EMAIL`, `LOGIN_PASSWORD`, and `LOGIN_WRONG_PASSWORD` through private environment variables or a local `.env.local` instead. Shell/CI variables take precedence, followed by `.env.local`, then `.env`. The URL must point to an accessible test environment; use a dedicated test account. Optionally set `GEMINI_API_KEY` for judge-backed checks. Without it, only the two judge-backed tests are skipped. `STORAGE_STATE_PATH` optionally overrides the default `playwright/.auth/state.json`; keep overrides outside version control. Never commit authentication state.
 
-    *   Generate an API key from the Google AI Studio ([https://makersuite.google.com/app/apikey](https://makersuite.google.com/app/apikey)).
-    *   Update the `.env` file in the project root directory.
-    *   Add your Gemini API key to the `.env` file:
-
-        ```
-        GEMINI_API_KEY="YOUR_API_KEY"
-        ```
+    Configure the same values in GitHub Actions: `CHATBOT_URL` as an environment variable under the `ci` environment, and the login values and optional Gemini key as environment secrets. Store the wrong password as a deliberately invalid value. Rotate any credentials previously committed to the repository; deleting a tracked file does not erase Git history.
 
 2.  **Playwright Configuration:**
 
@@ -101,13 +96,19 @@ Allure Reports are integrated for detailed and visually appealing test reports. 
     npx playwright test --ui
     ```
 
-3.  **Run a specific test file:**
+3.  **Run offline judge contract tests (no app or key needed):**
 
     ```bash
-    npx playwright test tests/example.spec.js
+    npm run test:unit
     ```
 
-4.  **Run tests in headed mode:**
+4.  **Run a specific test file:**
+
+    ```bash
+    npx playwright test tests/gpt-response.spec.js
+    ```
+
+5.  **Run tests in headed mode:**
 
     ```bash
     npx playwright test --headed
@@ -122,6 +123,9 @@ Allure Reports are integrated for detailed and visually appealing test reports. 
     ```
 
     This will open the Allure report in your default web browser.
+
+    CI retains Playwright and Allure raw results as a private workflow artifact for seven days, including failure traces. Treat artifacts as sensitive; they can capture conversation text. Live browser tests need the application and credentials, and judge-backed tests additionally need a Gemini key. The judge rubric passes at 60/100; the quality test enforces a stricter 70/100 threshold.
+    Forked pull requests run offline contract tests only, because GitHub does not provide them with environment secrets.
 
 ### Test Language Configuration
 

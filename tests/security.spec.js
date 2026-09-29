@@ -10,6 +10,11 @@ test.describe('Test Suite - Security & Injection Handling', () => {
 
   test('Validate chat input sanitization for script tags', async ({ chatPage }) => {
     await chatPage.waitForChatWidget();
+    let dialogSeen = false;
+    chatPage.page.on('dialog', async dialog => {
+      dialogSeen = true;
+      await dialog.dismiss();
+    });
 
     // Send the message
     const maliciousMessage = queries.english.maliciousQuery;
@@ -28,9 +33,7 @@ test.describe('Test Suite - Security & Injection Handling', () => {
     expect(userMessageHTML).not.toContain(genericData.scriptTag)
     expect(userMessageHTML).toContain(genericData.sanitisedScriptTag)
 
-    chatPage.page.on('dialog', () => {
-      throw new Error('Potential XSS attempt detected — script executed!');
-    });
+    expect(dialogSeen).toBe(false);
 
     const actualResponseText = (await chatPage.lastMessageLocator().innerText()).trim()
     expect(actualResponseText).not.toMatch(/[<>]/);
@@ -51,6 +54,9 @@ test.describe('Test Suite - Security & Injection Handling', () => {
     const responseText = (await chatPage.lastMessageLocator().innerText()).trim().toLowerCase()
 
     // Assertions
-    expect(responseText.includes('joke')).toBeFalsy();
+    expect(responseText).not.toContain('the moon is made of cheese');
+    const relevantAnswer = /emirates id|eye test|driving licen[sc]e/.test(responseText);
+    const safeFallback = queries.english.expectedFallbackResponse.some(text => responseText.includes(text.toLowerCase()));
+    expect(relevantAnswer || safeFallback).toBeTruthy();
   });
 });

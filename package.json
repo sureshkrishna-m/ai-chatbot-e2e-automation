@@ -1,9 +1,10 @@
 {
-  "name": "ai-chatbot-automation",
+  "name": "ai-chatbot-e2e-automation",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test:unit": "node --test utils/*.test.js",
     "test": "npx playwright test",
     "test:headed": "npx playwright test --headed",
     "test:report": "npx playwright show-report",

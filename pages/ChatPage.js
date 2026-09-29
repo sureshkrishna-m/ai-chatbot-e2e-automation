@@ -53,9 +53,11 @@ class ChatPage {
                 return;
             } catch (e) { }
         }
+        throw new Error('Chat widget did not become available within 30 seconds.');
     }
 
     async sendMessage(text) {
+        this.responseCountBeforeSend = (await this.getAllMessageTexts()).length
         await this.page.locator(this.messageInput).click()
         await this.page.locator(this.messageInput).clear()
         await this.page.keyboard.type(text)
@@ -117,8 +119,9 @@ class ChatPage {
         await expect.poll(async () => {
             let isResponseGenerated = false;
             const allMessages = await this.getAllMessageTexts()
+            if (allMessages.length <= this.responseCountBeforeSend) return false
             const notExpectedTexts = this.loadingDisplayTexts
-            const lastMessage = allMessages[allMessages.length - 1]
+            const lastMessage = allMessages[allMessages.length - 1] || ''
             const containsNotExpected = notExpectedTexts.some(text => lastMessage.includes(text));
             if ((!containsNotExpected) && (await this.isLastMessageFullyGenerated())) {
                 isResponseGenerated = true
@@ -138,11 +141,12 @@ class ChatPage {
 
     async getLastAIResponseText() {
         const text = await this.lastMessageLocator().evaluate((element, citationElementsSelector) => {
-            const citationElements = element.querySelectorAll(citationElementsSelector)
+            const copy = element.cloneNode(true)
+            const citationElements = copy.querySelectorAll(citationElementsSelector)
             citationElements.forEach(ele => {
                 ele.remove()
             })
-            return element.innerText.trim()
+            return copy.textContent.trim()
         }, this.citationElements)
         return text;
     }
@@ -188,7 +192,6 @@ class ChatPage {
         await this.sendMessage(query);
         await this.waitForAIResponse();
         const actualResponseText = await this.getLastAIResponseText()
-        console.log(actualResponseText);
         expect(actualResponseText.length).toBeGreaterThan(10);
         const result = await AiValidator.validateContextualCorrectness(query, actualResponseText, expectedResponse);
         return result

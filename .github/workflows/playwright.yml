@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      CHATBOT_URL: ${{ vars.CHATBOT_URL }}
+      LOGIN_EMAIL: ${{ secrets.LOGIN_EMAIL }}
+      LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
+      LOGIN_WRONG_PASSWORD: ${{ secrets.LOGIN_WRONG_PASSWORD }}
 
     steps:
       - uses: actions/checkout@v4
@@ -21,47 +25,28 @@ jobs:
         with:
           node-version: 'lts/*'
       
-      - name: Set up JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: zulu
-          java-version: 17
-
       - name: Install dependencies
         run: npm ci
 
+      - name: Run offline validator tests
+        run: npm run test:unit
+
       - name: Install Playwright Browsers
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
         run: npm test
 
-      - name: Load Allure test report history
-        uses: actions/checkout@v3
+      - name: Upload private test artifacts
         if: always()
-        continue-on-error: true
+        uses: actions/upload-artifact@v4
         with:
-          ref: gh-pages
-          path: gh-pages
-      
-      - name: Build Allure test report
-        uses: simple-elf/allure-report-action@v1.7
-        if: always()
-        with:
-          gh_pages: gh-pages
-          allure_history: allure-history
-          allure_results: allure-results
-
-      - name: Publish Allure test report
-        uses: peaceiris/actions-gh-pages@v3
-        if: always()
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: allure-history
-
-      - name: Add Allure report link to workflow summary
-        run: |
-          echo "### ✅ Allure Report published successfully 🚀" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "[🔗 View Allure Report](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/)" >> $GITHUB_STEP_SUMMARY
+          name: playwright-results
+          path: |
+            test-results/
+            playwright-report/
+            allure-results/
+          retention-days: 7
+          if-no-files-found: ignore
